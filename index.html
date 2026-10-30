@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flawless Prints | Custom Apparel</title>
+    <style>
+        /* ================= 全局基础样式 ================= */
+        :root { --ink:#1a1a1a; --muted:#666; --line:#e8e8e8; --green:#4CAF50; --green-dark:#45a049; --bg:#f9f9f9; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin:0; color:#333; line-height:1.6; background:var(--bg); }
+        a { text-decoration:none; color:inherit; cursor:pointer; } 
+        img { max-width: 100%; display: block; }
+        .container { max-width:1100px; margin:0 auto; padding:0 20px; }
+        
+        /* ================= 按钮 ================= */
+        .btn { display:inline-block; padding:10px 24px; border-radius:6px; font-weight:600; transition:all .25s; cursor:pointer; border:none; font-size:15px; }
+        .btn-primary { background:var(--green); color:#fff; box-shadow:0 4px 12px rgba(76,175,80,.3); } .btn-primary:hover { background:var(--green-dark); transform:translateY(-2px); }
+        .btn-dark { background:var(--ink); color:#fff; } .btn-dark:hover { background:#333; }
+        .btn-ghost { border:2px solid var(--ink); color:var(--ink); background:transparent; } .btn-ghost:hover { background:var(--ink); color:#fff; }
+
+        /* ================= 导航 ================= */
+        nav { background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.05); position:sticky; top:0; z-index:100; }
+        nav .container { display:flex; justify-content:space-between; align-items:center; padding:15px 20px; }
+        
+        .logo { font-size:22px; font-weight:bold; color:var(--ink); position: relative; display: inline-block; }
+        .logo::after { content: "®"; font-size: 12px; font-weight: 600; vertical-align: super; margin-left: 2px; color: var(--muted); }
+
+        .nav-links { display:flex; gap:28px; align-items:center; }
+        .nav-links a { font-size:15px; color:#444; font-weight:500; } .nav-links a:hover { color:var(--green); }
+        .nav-cta { background:var(--green); color:#fff !important; padding:10px 20px; border-radius:5px; }
+        .menu-toggle { display:none; font-size:28px; background:none; border:none; cursor:pointer; color: var(--ink); }
+
+        /* ================= 区块通用 ================= */
+        section.block { padding:70px 0; animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+        .section-head { text-align:center; margin-bottom:44px; } .section-head h2 { font-size:32px; margin:0 0 12px; color:var(--ink); } .section-head p { color:var(--muted); max-width:620px; margin:0 auto; font-size:16px; }
+        
+        /* ================= 首页 Hero ================= */
+        .hero { background:#fff; padding:80px 0 60px; text-align:center; border-bottom:1px solid var(--line); }
+        .hero h1 { font-size:46px; line-height:1.15; margin:0 0 20px; color:var(--ink); } .hero p { font-size:19px; color:var(--muted); max-width:680px; margin:0 auto 36px; }
+        .hero-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:48px; }
+        .hero-img { width:100%; max-width:960px; height:420px; margin:0 auto; border-radius:12px; background:#eee center/cover no-repeat; background-image:url('https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&w=1400&q=80'); }
+        
+        /* ================= 页面内页 Header ================= */
+        .page-hero { background:#fff; padding:60px 0 50px; text-align:center; border-bottom:1px solid var(--line); }
+        .page-hero h1 { font-size:40px; margin:0 0 14px; color:var(--ink); } .page-hero p { font-size:18px; color:var(--muted); max-width:680px; margin:0 auto; }
+        .breadcrumb { font-size:13px; color:#999; margin-bottom:16px; } .breadcrumb a:hover { color:var(--green); }
+
+        /* ================= 网格与卡片 ================= */
+        .grid { display:grid; gap:28px; } .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); } .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        .card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,.06); display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease; }
+        .card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(0,0,0,.1); }
+        .card-img { height:200px; background:#e9e9e9 center/cover no-repeat; } .card-body { padding:24px; flex:1; display:flex; flex-direction:column; }
+        .card-body h3 { font-size:20px; margin:0 0 10px; color:var(--ink); } .card-body p { color:var(--muted); font-size:15px; margin:0 0 18px; flex:1; }
+        .card-link { font-weight:600; color:var(--green); font-size:15px; } .card-link::after { content:" →"; } .card-link:hover { color:var(--green-dark); }
+
+        /* ================= 合作企业 Logo 墙 ================= */
+        .partner-section { padding: 40px 0; background: #fff; border-bottom: 1px solid var(--line); text-align: center; }
+        .partner-title { font-size: 13px; color: #999; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 24px; }
+        .partner-logos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 800px; margin: 0 auto; }
+        .logo-box { display: flex; align-items: center; justify-content: center; height: 70px; background: #fdfdfd; border: 1px solid #eaeaea; border-radius: 8px; font-size: 14px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
+        .logo-box:hover { border-color: var(--green); color: var(--green); background: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .logo-box svg { width: 20px; height: 20px; margin-right: 8px; fill: currentColor; }
+
+        /* ================= About 页：Ann 与密集签名墙 ================= */
+        .ann-intro { text-align: center; padding: 40px 0 20px; background: #fff; }
+        .ann-intro h1 { font-size: 36px; color: var(--ink); font-weight: 300; letter-spacing: 0.5px; margin: 0; }
+        .ann-intro h1 span { font-weight: 700; color: var(--green); }
+        
+        /* Ann 双图切换相框 */
+        .ann-photo-frame { 
+            width: 140px; height: 140px; 
+            margin: 25px auto 30px; 
+            border-radius: 50%; 
+            border: 4px solid var(--green);
+            padding: 4px;
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .ann-photo-frame:hover { transform: scale(1.05); }
+        
+        .ann-photo-layer {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: #eee center/cover no-repeat;
+            position: absolute;
+            top: 0; left: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .ann-photo-1 { opacity: 1; z-index: 2; transform: scale(1); background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80'); }
+        .ann-photo-2 { opacity: 0; z-index: 1; transform: scale(0.9); background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80'); }
+
+        .ann-photo-frame.is-flipped .ann-photo-1 { opacity: 0; z-index: 1; transform: scale(0.9); }
+        .ann-photo-frame.is-flipped .ann-photo-2 { opacity: 1; z-index: 2; transform: scale(1); }
+
+        .signature-wall-section { background: #fff; padding: 0 0 40px; }
+        
+        /* 10列 x 21行 (实际填满 210 个) */
+        .signature-wall { 
+            display: grid; 
+            grid-template-columns: repeat(10, 1fr); 
+            gap: 6px; 
+            margin-bottom: 30px;
+        }
+        .signature-box { 
+            background: #fafafa; 
+            border: 1px solid #f0f0f0; 
+            border-radius: 4px; 
+            height: 38px; 
+            background-size: 70%; 
+            background-repeat: no-repeat; 
+            background-position: center; 
+            transition: all 0.2s ease;
+        }
+        .signature-box:hover { 
+            border-color: var(--green); 
+            background-color: #fff; 
+            transform: scale(1.2); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+            z-index: 10;
+        }
+
+        /* ================= 其他组件 ================= */
+        .trust-bar { background:var(--ink); color:#ddd; } .trust-bar .container { display:flex; flex-wrap:wrap; justify-content:center; gap:10px 40px; padding:16px 20px; font-size:14px; letter-spacing:.3px; }
+        .trust-bar span::before { content:"✔ "; color:var(--green); }
+        .spec-bar { display:flex; flex-wrap:wrap; justify-content:center; gap:12px 32px; background:var(--bg); border-radius:10px; padding:20px; font-size:15px; color:#444; }
+        .spec-bar b { color:var(--ink); }
+        .quote { font-style:italic; color:#555; font-size:14px; border-left:3px solid var(--green); padding-left:12px; }
+        
+        .table-wrap { overflow-x:auto; background:#fff; border-radius:10px; box-shadow:0 4px 16px rgba(0,0,0,.06); }
+        table { width:100%; border-collapse:collapse; font-size:15px; } th, td { padding:14px 18px; text-align:left; border-bottom:1px solid var(--line); } th { background:var(--bg); color:var(--ink); font-weight:600; } tr:last-child td { border-bottom:none; }
+
+        /* ================= Contact Grid ================= */
+        .contact-grid { display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px; align-items:start; }
+        .form-card { background:#fff; border-radius:12px; padding:36px; box-shadow:0 4px 20px rgba(0,0,0,.08); }
+        .form-group { margin-bottom:20px; } .form-group label { display:block; font-size:14px; font-weight:600; color:var(--ink); margin-bottom:7px; }
+        .form-group input, .form-group select, .form-group textarea { width:100%; padding:12px 14px; border:1px solid #ddd; border-radius:6px; font-size:15px; font-family:inherit; background:#fff; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--green); }
+        .form-group textarea { resize:vertical; min-height:110px; } .form-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+        .form-success { display:none; background:#eef7ee; border:1px solid var(--green); color:#2e7d32; padding:16px; border-radius:8px; margin-bottom:20px; font-size:15px; }
+        
+        .contact-info { background:#fff; border-radius:12px; padding:32px; box-shadow:0 4px 20px rgba(0,0,0,.08); }
+        .contact-info h3 { font-size:20px; margin:0 0 16px; color:var(--ink); } .contact-info p { color:var(--muted); font-size:15px; margin:0 0 14px; } .contact-info a { color:var(--green); font-weight:600; }
+        .info-block { padding:18px 0; border-bottom:1px solid var(--line); } .info-block:last-child { border-bottom:none; } .info-block strong { display:block; color:var(--ink); font-size:14px; margin-bottom:4px; }
+
+        /* ================= CTA ================= */
+        .cta-final { background:#fff; color:var(--ink); text-align:center; padding:30px 0; border-top: 1px solid var(--line); }
+        .cta-final h2 { font-size:24px; margin:0 0 8px; font-weight:700; color:var(--green); }
+        .cta-final p { font-size:14px; color:var(--muted); margin:0 0 16px; }
+
+        /* ================= 黑色页脚 ================= */
+        footer { background:#111; color:#aaa; font-size:13px; padding-top: 30px; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:24px; margin-bottom:20px; }
+        .footer-grid h4 { color:#fff; font-size:14px; margin:0 0 10px; } .footer-grid a { display:block; color:#aaa; margin-bottom:6px; } .footer-grid a:hover { color:var(--green); }
+        
+        /* Contact 下方 5 个小图标 */
+        .footer-social-icons { display: flex; gap: 12px; margin-top: 15px; flex-wrap: wrap; }
+        .footer-social-icons a { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #222; color: #aaa; transition: all 0.2s; margin-bottom: 0 !important; }
+        .footer-social-icons a:hover { background: var(--green); color: #fff; transform: translateY(-2px); }
+        .footer-social-icons svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* ================= 最底部白底黑字栏 ================= */
+        .footer-bottom-white { 
+            background-color: #ffffff; 
+            color: var(--ink); 
+            padding: 15px 20px; 
+            border-top: 1px solid var(--line);
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 15px;
+            font-size: 13px; 
+        }
+        
+        .payment-icons { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .payment-icons .pay-text { font-size: 12px; font-weight: 700; color: #555; background: #f0f0f0; padding: 4px 8px; border-radius: 4px; }
+        .payment-icons svg { height: 24px; width: auto; }
+
+        /* ================= 预留图位 ================= */
+        .img-placeholder {
+            height: 180px;
+            background-color: #f5f5f5;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        /* ================= 视频宽高比 ================= */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 */
+            background: #000;
+        }
+        .video-container video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+            object-fit: cover;
+        }
+
+        /* ================= 响应式 ================= */
+        @media (max-width: 900px) {
+            .nav-links { gap: 15px; }
+        }
+        @media (max-width: 860px) {
+            .contact-grid { grid-template-columns:1fr; }
+            .footer-grid { grid-template-columns:1fr 1fr; }
+            .partner-logos { grid-template-columns: repeat(2, 1fr); }
+            .signature-wall { grid-template-columns: repeat(6, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                right: 0; 
+                background: #fff; 
+                padding: 20px; 
+                box-shadow: 0 8px 20px rgba(0,0,0,.08); 
+                gap: 16px; 
+            }
+            .nav-links.open { display: flex; }
+            .nav-cta { width: 100%; text-align: center; }
+            
+            .hero h1 { font-size:32px; } .hero p { font-size:16px; } .hero-img { height:240px; }
+            .page-hero h1, .section-head h2, .cta-final h2 { font-size:26px; }
+            .form-row { grid-template-columns:1fr; } .form-card { padding:24px; }
+            .footer-grid { grid-template-columns:1fr; }
+            .ann-intro h1 { font-size: 26px; }
+            .signature-wall { grid-template-columns: repeat(5, 1fr); }
+            .cta-final { padding: 20px 0; }
+            .footer-bottom-white { flex-direction: column-reverse; justify-content: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container">
+            <a onclick="showPage('home')" class="logo">Flawless Prints</a>
+            <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+            <div class="nav-links">
+                <a onclick="showPage('products')">Products</a>
+                <a onclick="showPage('customization')">Flawless</a>
+                <a onclick="showPage('custom-options')">Prints</a>
+                <a onclick="showPage('cases')">Case Studies</a>
+                <a onclick="showPage('about')">About Us</a>
+                <a onclick="showPage('contact')" class="nav-cta">Get a Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= 1. 主页 ================= -->
+    <main id="page-home" class="page">
+        <header class="hero">
+            <div class="container">
+                <h1>Perfect Prints. On-Time Delivery.</h1>
+                <p>Premium custom event apparel, class & group apparel, and sports teamwear. Zero color fade, low MOQ from 20 pcs, and delivery guaranteed before your big day.</p>
+                <div class="hero-actions">
+                    <a onclick="showPage('contact')" class="btn btn-primary">Get a Quote</a>
+                    <a onclick="showPage('products')" class="btn btn-ghost">Browse Products</a>
+                </div>
+                <div class="hero-img"></div>
+            </div>
+        </header>
+
+        <div class="partner-section">
+            <div class="container">
+                <div class="partner-title">Trusted by leading organizations and schools</div>
+                <div class="partner-logos">
+                    <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> TechCorp</div>
+                    <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Acme Inc</div>
+                    <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Global 5K</div>
+                    <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> State Univ</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trust-bar">
+            <div class="container">
+                <span>500+ orders delivered</span><span>On-time guarantee</span><span>Low MOQ from 20 pcs</span><span>Zero color fade</span>
+            </div>
+        </div>
+
+        <section class="block">
+            <div class="container">
+                <div class="section-head"><h2>What We Customize</h2><p>Purpose-built apparel for every occasion — printed, pressed, and delivered to your door.</p></div>
+                <div class="grid grid-3">
+                    <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><h3>Event Apparel</h3><p>Corporate events, parties, and promotions. High-quality custom-printed apparel that makes your team unforgettable.</p><a onclick="showPage('event-shirts')" class="card-link">View Event Apparel</a></div></article>
+                    <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><h3>Class & Group Apparel</h3><p>Graduation, school trips, and group spirit. Low minimum order quantities for small classes.</p><a onclick="showPage('class-apparel')" class="card-link">View Class & Group Apparel</a></div></article>
+                    <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><h3>Sports Teamwear</h3><p>Breathable, durable, sweat-resistant fabrics. Custom names and numbers for any sport.</p><a onclick="showPage('sports-teamwear')" class="card-link">View Sports Teamwear</a></div></article>
+                </div>
+                <div style="text-align:center; margin-top:40px;"><a onclick="showPage('products')" class="btn btn-dark">View All Products</a></div>
+            </div>
+        </section>
+
+        <section class="block" style="background:#fff;">
+            <div class="container">
+                <div class="section-head"><h2>Customization &amp; Inventory</h2><p>A simple process, transparent lead times, and flexible minimums.</p></div>
+                <div class="grid grid-3" style="margin-bottom:40px;">
+                    <div style="text-align:center;"><div style="width:48px; height:48px; border-radius:50%; background:var(--green); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px; margin:0 auto 14px;">1</div><h3>Send Requirements</h3><p>Quantity, design idea, and deadline.</p></div>
+                    <div style="text-align:center;"><div style="width:48px; height:48px; border-radius:50%; background:var(--green); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px; margin:0 auto 14px;">2</div><h3>Approve Design &amp; Quote</h3><p>We confirm artwork and pricing within 24 hours.</p></div>
+                    <div style="text-align:center;"><div style="width:48px; height:48px; border-radius:50%; background:var(--green); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px; margin:0 auto 14px;">3</div><h3>Production &amp; Delivery</h3><p>Printed, packed, and shipped before your date.</p></div>
+                </div>
+                <div class="spec-bar"><div>MOQ <b>20 pcs</b></div><div>Standard <b>7–10 business days</b></div><div>Rush <b>3–5 days available</b></div><div>Samples <b>available</b></div></div>
+                <div style="text-align:center; margin-top:36px;"><a onclick="showPage('customization')" class="btn btn-primary">Learn How It Works</a></div>
+            </div>
+        </section>
+
+        <section class="block">
+            <div class="container">
+                <div class="section-head"><h2>Success Stories</h2><p>Real orders, real deadlines, real teams.</p></div>
+                <div class="grid grid-3">
+                    <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">Corporate Event</div><h3>200 pcs for a Corporate 5K</h3><p>Custom event apparel delivered in 8 days, with zero color fade after race-day washing.</p><p class="quote">"Everything arrived early and looked exactly like the proof."</p></div></article>
+                    <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">Graduation Class</div><h3>35 pcs Class & Group Apparel</h3><p>Low-MOQ class shirts with custom names on the back, delivered before graduation week.</p><p class="quote">"The class loved them. Names and numbers were spot on."</p></div></article>
+                    <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">Sports Team</div><h3>60 pcs Sports Teamwear</h3><p>Breathable jerseys with custom names and numbers, shipped in 6 days for a regional tournament.</p><p class="quote">"Great fabric, great fit, and they held up all season."</p></div></article>
+                </div>
+                <div style="text-align:center; margin-top:40px;"><a onclick="showPage('cases')" class="btn btn-dark">See All Case Studies</a></div>
+            </div>
+        </section>
+
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 2. 产品概览 ================= -->
+    <main id="page-products" class="page" style="display:none;">
+        <header class="page-hero"><div class="container"><div class="breadcrumb"><a onclick="showPage('home')">Home</a> / Products</div><h1>Custom Apparel for Every Occasion</h1><p>Three purpose-built categories — each with low minimums, premium printing, and guaranteed delivery dates.</p></div></header>
+        <section class="block"><div class="container"><div class="grid grid-3">
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><h3>Event Apparel</h3><p>For corporate events, parties, promotions, and 5K runs. High-opacity prints that stay crisp wash after wash.</p><div class="spec-bar" style="padding:14px; font-size:13px; margin-bottom:12px;"><div>MOQ <b>20 pcs</b></div><div>Lead <b>7–10 days</b></div><div>From <b>$8/pc</b></div></div><a onclick="showPage('event-shirts')" class="card-link">View Event Apparel</a></div></article>
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><h3>Class & Group Apparel</h3><p>For graduation, school trips, and group spirit. Low minimums designed for small classes and student budgets.</p><div class="spec-bar" style="padding:14px; font-size:13px; margin-bottom:12px;"><div>MOQ <b>15 pcs</b></div><div>Lead <b>7–10 days</b></div><div>From <b>$9/pc</b></div></div><a onclick="showPage('class-apparel')" class="card-link">View Class & Group Apparel</a></div></article>
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><h3>Sports Teamwear</h3><p>Breathable, durable, sweat-resistant fabrics. Custom names and numbers for any sport, any season.</p><div class="spec-bar" style="padding:14px; font-size:13px; margin-bottom:12px;"><div>MOQ <b>20 pcs</b></div><div>Lead <b>6–10 days</b></div><div>From <b>$12/pc</b></div></div><a onclick="showPage('sports-teamwear')" class="card-link">View Sports Teamwear</a></div></article>
+        </div></div></section>
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 3. 赛事服分类 (6图预留) ================= -->
+    <main id="page-event-shirts" class="page" style="display:none;">
+        <header class="page-hero"><div class="container"><div class="breadcrumb"><a onclick="showPage('home')">Home</a> / <a onclick="showPage('products')">Products</a> / Event Apparel</div><h1>Custom Event Apparel</h1><p>Make your corporate event, party, or 5K unforgettable with high-opacity prints that won't crack or fade.</p></div></header>
+        <section class="block">
+            <div class="container">
+                <div class="section-head"><h2>Built for Events That Matter</h2></div>
+                <div class="grid grid-3">
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Corporate Events</h3><p>Company 5Ks, team-building days, product launches.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Parties &amp; Celebrations</h3><p>Birthdays, reunions, bachelor/bachelorette parties.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Promotions &amp; Campaigns</h3><p>Giveaways, brand activations, and marketing campaigns.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Charity Runs</h3><p>Awareness walks, charity marathons, and fundraising events.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Music Festivals</h3><p>Staff shirts, volunteer uniforms, and VIP merchandise.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Trade Shows</h3><p>Booth staff apparel and promotional giveaways.</p></div></div>
+                </div>
+            </div>
+        </section>
+        <section class="block" style="background:#fff;"><div class="container"><div class="section-head"><h2>Specs at a Glance</h2></div><div class="spec-bar"><div>MOQ <b>20 pcs</b></div><div>Standard lead time <b>7–10 business days</b></div><div>Rush option <b>3–5 days</b></div><div>Starting price <b>From $8/pc</b></div></div><div style="text-align:center; margin-top:28px;"><a onclick="showPage('contact')" class="btn btn-primary">Get a Quote for Event Apparel</a></div></div></section>
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 4. 班服校服分类 (6图预留) ================= -->
+    <main id="page-class-apparel" class="page" style="display:none;">
+        <header class="page-hero"><div class="container"><div class="breadcrumb"><a onclick="showPage('home')">Home</a> / <a onclick="showPage('products')">Products</a> / Class & Group Apparel</div><h1>Custom Class & Group Apparel</h1><p>Graduation, school trips, and group spirit. Low minimums designed for small classes and student budgets.</p></div></header>
+        <section class="block">
+            <div class="container">
+                <div class="section-head"><h2>Commemorate Your School Year</h2></div>
+                <div class="grid grid-3">
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Graduation</h3><p>Custom graduation shirts with names, years, and class mottos. Perfect for senior week.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>School Trips</h3><p>Keep the class together in crowded places with bright, custom-printed tour shirts.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Group Spirit</h3><p>Uniforms, spirit wear, and club apparel that build identity and pride.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Sports Teams</h3><p>School team jerseys and practice gear with custom names.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Clubs &amp; Societies</h3><p>Matching hoodies and shirts for campus organizations.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Teacher Apparel</h3><p>Staff polos and jackets featuring the school logo.</p></div></div>
+                </div>
+            </div>
+        </section>
+        <section class="block" style="background:#fff;"><div class="container"><div class="section-head"><h2>Specs at a Glance</h2></div><div class="spec-bar"><div>MOQ <b>15 pcs</b></div><div>Standard lead time <b>7–10 business days</b></div><div>Rush option <b>3–5 days</b></div><div>Starting price <b>From $9/pc</b></div></div><div style="text-align:center; margin-top:28px;"><a onclick="showPage('contact')" class="btn btn-primary">Get a Quote for Class & Group Apparel</a></div></div></section>
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 5. 运动队服分类 (6图预留) ================= -->
+    <main id="page-sports-teamwear" class="page" style="display:none;">
+        <header class="page-hero"><div class="container"><div class="breadcrumb"><a onclick="showPage('home')">Home</a> / <a onclick="showPage('products')">Products</a> / Sports Teamwear</div><h1>Custom Sports Teamwear</h1><p>Breathable, durable teamwear with custom names and numbers for any sport, any season.</p></div></header>
+        <section class="block">
+            <div class="container">
+                <div class="section-head"><h2>Built for Performance</h2></div>
+                <div class="grid grid-3">
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Team Sports</h3><p>Jerseys and practice shirts for basketball, soccer, volleyball, and more.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Tournaments</h3><p>Quick-turnaround custom teamwear for regional and national events.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Training Groups</h3><p>Durable performance apparel for gyms, bootcamps, and fitness challenges.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Fan Gear</h3><p>Custom supporter shirts for local leagues and fan clubs.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Corporate Sports</h3><p>Company sports leagues and corporate challenge uniforms.</p></div></div>
+                    <div class="card"><div class="card-body"><div class="img-placeholder">Image Coming Soon (Max 150KB)</div><h3>Sporting Events</h3><p>Volunteer shirts and staff apparel for marathons and races.</p></div></div>
+                </div>
+            </div>
+        </section>
+        <section class="block" style="background:#fff;"><div class="container"><div class="section-head"><h2>Specs at a Glance</h2></div><div class="spec-bar"><div>MOQ <b>20 pcs</b></div><div>Standard lead time <b>6–10 business days</b></div><div>Rush option <b>3–5 days</b></div><div>Starting price <b>From $12/pc</b></div></div><div style="text-align:center; margin-top:28px;"><a onclick="showPage('contact')" class="btn btn-primary">Get a Quote for Teamwear</a></div></div></section>
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 6. 定制与库存 ================= -->
+    <main id="page-customization" class="page" style="display:none;">
+        <header class="page-hero"><div class="container"><div class="breadcrumb"><a onclick="showPage('home')">Home</a> / Flawless</div><h1>Production Process &amp; Shipping</h1><p>Watch how we make your apparel, and see how fast we can get it to your door.</p></div></header>
+        <section class="block">
+            <div class="container">
+                <div class="section-head"><h2>See Our Production Line</h2><p>From digital proofing to final packing, quality is checked at every step.</p></div>
+                <div class="grid grid-3">
+                    <!-- 1. 真实工厂印花视频 -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-printing-a-t-shirt-in-a-factory-42816-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3 style="font-size:18px;">1. Design &amp; Proofing</h3><p style="margin-bottom:0; font-size:14px;">Our designers check your artwork for resolution, color separation, and print readiness.</p></div>
+                    </div>
+                    <!-- 2. 裁切准备视频 -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1558442074-3c19857bc1dc?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-sewing-machine-in-a-textile-factory-42819-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3 style="font-size:18px;">2. Cutting &amp; Prepping</h3><p style="margin-bottom:0; font-size:14px;">Garments are laid out, checked for seams, and prepped for the printing line.</p></div>
+                    </div>
+                    <!-- 3. 丝网印视频 -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1598301257982-0cf014dabbcd?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-printing-tshirts-in-a-factory-42818-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3 style="font-size:18px;">3. Screen Printing</h3><p style="margin-bottom:0; font-size:14px;">High-precision machines apply the ink, ensuring colors pop and stay vibrant.</p></div>
+                    </div>
+                    <!-- 4. 刺绣视频 -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1584483777412-8cc8a54a1b43?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-embroidery-machine-in-a-factory-42821-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3 style="font-size:18px;">4. Embroidery</h3><p style="margin-bottom:0; font-size:14px;">Multi-head embroidery machines stitch logos with precision and consistency.</p></div>
+                    </div>
+                    <!-- 5. 质检视频 -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-worker-checking-clothes-in-a-factory-42822-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3 style="font-size:18px;">5. Quality Check</h3><p style="margin-bottom:0; font-size:14px;">Every single piece is inspected for flaws, misprints, and stitching errors.</p></div>
+                    </div>
+                    <!-- 6. 包装视频 -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1586528116311-ad8ed7c8a253?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-packing-clothes-in-a-factory-42823-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3 style="font-size:18px;">6. Folding &amp; Packing</h3><p style="margin-bottom:0; font-size:14px;">Sorted by size and securely packaged for transit, ready for express shipping.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="block" style="background:#fff;">
+            <div class="container">
+                <div class="section-head"><h2>Shipping &amp; Logistics</h2><p>We guarantee delivery before your event. Track your order every step of the way.</p></div>
+                <div class="grid grid-2" style="margin-bottom:40px;">
+                    <div class="card" style="background:var(--bg); border:none; box-shadow:none; padding:10px;">
+                        <div class="card-body">
+                            <h3>🌐 Global Express Delivery</h3>
+                            <p style="margin-bottom:0;">We partner with DHL, FedEx, and UPS to ensure fast, reliable international shipping. All orders come with a tracking number sent directly to your email.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="background:var(--bg); border:none; box-shadow:none; padding:10px;">
+                        <div class="card-body">
+                            <h3>🛡️ On-Time Guarantee</h3>
+                            <p style="margin-bottom:0;">If your order misses the guaranteed delivery date due to our production or shipping delays, we will refund your expedited shipping fees entirely.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Destination</th><th>Production Time</th><th>Shipping Time</th><th>Total Lead Time</th></tr></thead>
+                        <tbody>
+                            <tr><td>United States &amp; Canada</td><td>7–10 days</td><td>3–5 days (Express)</td><td><b>10–15 days</b></td></tr>
+                            <tr><td>United Kingdom &amp; Europe</td><td>7–10 days</td><td>3–6 days (Express)</td><td><b>10–16 days</b></td></tr>
+                            <tr><td>Australia &amp; NZ</td><td>7–10 days</td><td>4–7 days (Express)</td><td><b>11–17 days</b></td></tr>
+                            <tr><td>Rest of the World</td><td>7–10 days</td><td>7–14 days</td><td><b>14–24 days</b></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 7. 定制选项 (6个真实工艺视频 + 3张高清面料图) ================= -->
+    <main id="page-custom-options" class="page" style="display:none;">
+        <header class="page-hero"><div class="container"><div class="breadcrumb"><a onclick="showPage('home')">Home</a> / Prints</div><h1>Every Option, Explained</h1><p>See the printing process in action and feel the fabric quality before you order.</p></div></header>
+        <section class="block">
+            <div class="container">
+                <div class="section-head"><h2>Printing Methods in Action</h2></div>
+                <div class="grid grid-3">
+                    <!-- 1. Screen Printing -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1598301257982-0cf014dabbcd?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-printing-tshirts-in-a-factory-42818-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3>Screen Printing</h3><p style="margin-bottom:0; font-size:14px;">Bold, high-opacity designs. Best value at 50+ pcs and highly durable after washing.</p></div>
+                    </div>
+                    <!-- 2. DTG Printing -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-printing-a-t-shirt-in-a-factory-42816-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3>DTG Printing</h3><p style="margin-bottom:0; font-size:14px;">Direct-to-garment full-color printing. No color limits, ideal for highly detailed artwork.</p></div>
+                    </div>
+                    <!-- 3. Embroidery -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1584483777412-8cc8a54a1b43?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-embroidery-machine-in-a-factory-42821-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3>Embroidery</h3><p style="margin-bottom:0; font-size:14px;">Premium stitched logos on polos, caps, and jackets. Unbeatable durability and texture.</p></div>
+                    </div>
+                    <!-- 4. Heat Transfer -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-ironing-a-shirt-42820-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3>Heat Transfer</h3><p style="margin-bottom:0; font-size:14px;">Perfect for lightweight custom names and numbers. Great for small batches and personalization.</p></div>
+                    </div>
+                    <!-- 5. Foil Printing -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-printing-gold-foil-on-a-shirt-42824-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3>Foil Printing</h3><p style="margin-bottom:0; font-size:14px;">Metallic gold or silver finishes for premium brand logos. Adds a luxury feel to any event.</p></div>
+                    </div>
+                    <!-- 6. Custom Labels -->
+                    <div class="card" style="overflow:hidden;">
+                        <div class="video-container">
+                            <video controls poster="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=800&q=80">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-sewing-a-label-on-a-garment-42825-large.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="card-body" style="padding:20px;"><h3>Custom Labels</h3><p style="margin-bottom:0; font-size:14px;">Personalized woven neck labels and care tags to complete your custom brand identity.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="block" style="background:#fff;">
+            <div class="container">
+                <div class="section-head"><h2>Fabric Textures up Close</h2></div>
+                <div class="grid grid-3">
+                    <!-- 面料图 1 -->
+                    <div class="card">
+                        <div class="card-img" style="height:240px; background-image:url('https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="card-body">
+                            <h3>100% Cotton</h3>
+                            <p>Soft hand-feel and breathable. The classic choice for casual everyday event shirts.</p>
+                            <div class="spec-bar" style="padding:10px; font-size:12px; margin-top:auto;"><div>GSM <b>180-200</b></div><div>Texture <b>Soft</b></div></div>
+                        </div>
+                    </div>
+                    <!-- 面料图 2 -->
+                    <div class="card">
+                        <div class="card-img" style="height:240px; background-image:url('https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="card-body">
+                            <h3>Cotton/Poly Blend</h3>
+                            <p>Durable, wrinkle-resistant, and holds its shape perfectly after multiple washes.</p>
+                            <div class="spec-bar" style="padding:10px; font-size:12px; margin-top:auto;"><div>GSM <b>160-180</b></div><div>Texture <b>Smooth</b></div></div>
+                        </div>
+                    </div>
+                    <!-- 面料图 3 -->
+                    <div class="card">
+                        <div class="card-img" style="height:240px; background-image:url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="card-body">
+                            <h3>Performance Polyester</h3>
+                            <p>Moisture-wicking and quick-drying. The absolute best choice for sports and active events.</p>
+                            <div class="spec-bar" style="padding:10px; font-size:12px; margin-top:auto;"><div>GSM <b>140-150</b></div><div>Texture <b>Micro-Mesh</b></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 8. 成功案例 ================= -->
+    <main id="page-cases" class="page" style="display:none;">
+        <header class="page-hero"><div class="container"><div class="breadcrumb"><a onclick="showPage('home')">Home</a> / Case Studies</div><h1>Real Orders. Real Deadlines.</h1><p>A selection of recent projects — with quantities, lead times, and client feedback.</p></div></header>
+        <div class="partner-section" style="border-bottom:none;">
+            <div class="container">
+                <div class="partner-title">Trusted by teams at</div>
+                <div class="partner-logos">
+                    <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> TechCorp</div>
+                    <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Acme Inc</div>
+                    <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Global 5K</div>
+                    <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> State Univ</div>
+                </div>
+            </div>
+        </div>
+        <section class="block" style="padding-top:20px;"><div class="container"><div class="grid grid-3">
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">Corporate Event</div><h3>200 pcs for a Corporate 5K</h3><p>Delivered in 8 days, with zero color fade after race-day washing.</p><p class="quote">"Everything arrived early and looked exactly like the proof."</p></div></article>
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">Graduation Class</div><h3>35 pcs Class & Group Apparel</h3><p>Custom names on the back, delivered before graduation week.</p><p class="quote">"The class loved them. Names and numbers were spot on."</p></div></article>
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">Sports Team</div><h3>60 pcs Sports Teamwear</h3><p>Shipped in 6 days for a regional tournament.</p><p class="quote">"Great fabric, great fit, and they held up all season."</p></div></article>
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">Product Launch</div><h3>80 pcs Brand Activation Apparel</h3><p>Full-color DTG prints, delivered in 7 days.</p><p class="quote">"The colors matched our brand kit perfectly."</p></div></article>
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">School Trip</div><h3>45 pcs Class Trip Apparel</h3><p>Low-MOQ school trip apparel with front logo and back names, delivered in 9 days.</p><p class="quote">"Easy process and the students were thrilled."</p></div></article>
+            <article class="card"><div class="card-img" style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80')"></div><div class="card-body"><div style="font-size:13px; color:var(--green); font-weight:600; text-transform:uppercase; margin-bottom:6px;">Fitness Event</div><h3>120 pcs Fitness Challenge Apparel</h3><p>Performance polyester apparel with heat-transfer numbers, delivered in 7 days.</p><p class="quote">"Held up through the whole challenge weekend."</p></div></article>
+        </div></div></section>
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 9. 企业文化 (10列x21行 签名墙) ================= -->
+    <main id="page-about" class="page" style="display:none;">
+        
+        <div class="ann-intro">
+            <div class="container">
+                <h1>This is <span>Ann</span> , our story start as below...</h1>
+                
+                <div class="ann-photo-frame" id="annPhotoFrame" onclick="toggleAnnPhoto()">
+                    <div class="ann-photo-layer ann-photo-1"></div>
+                    <div class="ann-photo-layer ann-photo-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="signature-wall-section">
+            <div class="container">
+                <!-- 10列 x 21行 铺满，共 210 个签名。代码里为您填满了 21 行。-->
+                <div class="signature-wall">
+                    <!-- 1 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <!-- 2 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <!-- 3 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <!-- 4 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <!-- 5 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <!-- 6 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <!-- 7 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <!-- 8 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <!-- 9 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <!-- 10 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <!-- 11 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <!-- 12 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <!-- 13 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <!-- 14 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <!-- 15 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <!-- 16 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <!-- 17 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <!-- 18 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <!-- 19 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <!-- 20 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <!-- 21 -->
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/John_Hancock_signature.svg/1200px-John_Hancock_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walt_Disney_Signature.svg/1200px-Walt_Disney_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Michael_Jordan_signature.svg/1200px-Michael_Jordan_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Steve_Jobs_signature.svg/1200px-Steve_Jobs_signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Thomas_Edison_Signature.svg/1200px-Thomas_Edison_Signature.svg.png');"></div>
+                    <div class="signature-box" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/John_F_Kennedy_Signature.svg/1200px-John_F_Kennedy_Signature.svg.png');"></div>
+                </div>
+                <div style="text-align:center; margin-top: 20px;">
+                    <a onclick="showPage('contact')" class="btn btn-ghost" style="border-color:var(--green); color:var(--green); border-width:1px;">
+                        + Upload Your Signature
+                    </a>
+                    <p style="font-size:13px; color:#999; margin-top:10px;">*Available after your first order is delivered.</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= 10. 联系询盘 ================= -->
+    <main id="page-contact" class="page" style="display:none;">
+        <header class="page-hero"><div class="container"><div class="breadcrumb"><a onclick="showPage('home')">Home</a> / Contact</div><h1>Get a Quote</h1><p>Send your quantity, design idea, and deadline — we'll reply within 24 hours with a proof and itemized quote.</p></div></header>
+        <section class="block"><div class="container contact-grid">
+            <div class="form-card">
+                <div class="form-success" id="formSuccess">Thanks! Your request has been sent. We'll reply within 24 hours.</div>
+                <form id="quoteForm" action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group"><label>Your Name *</label><input type="text" required placeholder="Jane Doe"></div>
+                        <div class="form-group"><label>Email *</label><input type="email" required placeholder="jane@company.com"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>What do you need? *</label><select required><option value="">Select a category</option><option value="event-shirts">Event Apparel</option><option value="class-apparel">Class & Group Apparel</option><option value="sports-teamwear">Sports Teamwear</option><option value="other">Other / Not sure</option></select></div>
+                        <div class="form-group"><label>Quantity *</label><input type="number" min="1" required placeholder="e.g. 50"></div>
+                    </div>
+                    <div class="form-group"><label>Deadline / Event Date</label><input type="date"></div>
+                    <div class="form-group"><label>Design Idea &amp; Requirements *</label><textarea required placeholder="Tell us about your design, colors, sizes, logo placement, and any other details."></textarea></div>
+                    <button type="submit" class="btn btn-primary" style="width:100%; font-size:16px;">Send Request</button>
+                    <p style="font-size:13px; color:#999; margin-top:14px;">We reply within 24 hours. No spam, ever.</p>
+                </form>
+            </div>
+
+            <aside class="contact-info">
+                <h3>Prefer Email?</h3><p>Send your requirements directly to <a href="mailto:hello@flawlessprints.com">hello@flawlessprints.com</a> and we'll reply within 24 hours.</p>
+                <div class="info-block"><strong>Response Time</strong><p>Within 24 hours, Monday–Friday.</p></div>
+                <div class="info-block"><strong>What to Include</strong><p>Quantity, design idea or logo file, deadline, and size breakdown if available.</p></div>
+                <div class="info-block"><strong>Minimum Order</strong><p>15 pcs for class & group apparel, 20 pcs for event apparel and teamwear.</p></div>
+                <div class="info-block"><strong>Lead Time</strong><p>7–10 business days standard; 3–5 days rush available.</p></div>
+            </aside>
+        </div></section>
+        <section class="cta-final">
+            <div class="container">
+                <h2>Let's Make Something You're Proud to Wear</h2>
+                <p>Send your quantity, design idea, and deadline — we'll reply within 24 hours.</p>
+                <a onclick="showPage('contact')" class="btn btn-dark" style="padding: 10px 28px; font-size: 14px;">Get a Quote</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>Flawless Prints<span style="font-size: 10px; font-weight: 600; vertical-align: super; margin-left: 2px; color: #666;">®</span></h4>
+                    <p style="margin-bottom: 4px;">Custom event apparel, class & group apparel, and sports teamwear.</p>
+                    <p>Zero color fade, on-time delivery.</p>
+                </div>
+                <div>
+                    <h4>Products</h4>
+                    <a onclick="showPage('products')">All Products</a>
+                    <a onclick="showPage('event-shirts')">Event Apparel</a>
+                    <a onclick="showPage('class-apparel')">Class & Group Apparel</a>
+                    <a onclick="showPage('sports-teamwear')">Sports Teamwear</a>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <div class="footer-social-icons">
+                        <a href="mailto:hello@flawlessprints.com" title="Email Us">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        </a>
+                        <a href="#" target="_blank" title="WhatsApp">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        </a>
+                        <a href="#" target="_blank" title="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.13 8.44 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99C18.34 21.13 22 16.99 22 12z"/></svg>
+                        </a>
+                        <a href="#" target="_blank" title="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.89 2.38 7.15 2.23 8.42 2.18 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.4-11.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg>
+                        </a>
+                        <a href="#" target="_blank" title="YouTube">
+                            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.5 15.5v-7l6.3 3.5z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 最底部白底黑字栏 -->
+        <div class="footer-bottom-white">
+            <div class="payment-icons">
+                <!-- Visa -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#1A1F71" d="M9.112 8.262L5.97 15.758H3.92L2.374 9.775c-.094-.368-.175-.503-.461-.658C1.447 8.864.62 8.62 0 8.463l.046-.216h3.427c.437 0 .83.29.929.791l.81 4.302 1.992-5.093h2.054l-.146.015zm7.796 4.922c-.015-2.664-3.714-2.814-3.687-4.007.008-.361.355-.748 1.113-.845.865-.11 1.627.131 2.053.244l.343-1.594c-.506-.192-1.387-.397-2.481-.397-2.41 0-4.11 1.281-4.126 3.114-.018 1.354 1.214 2.107 2.143 2.557.957.462 1.279.76 1.279 1.175-.009.635-.775.922-1.491.932-1.028.015-1.623-.157-2.25-.395l-.357 1.664c.558.255 1.585.477 2.637.488 2.523.001 4.163-1.222 4.168-3.126l.156-.008zm6.196 2.574H25l-1.878-7.496h-1.85c-.414 0-.763.242-.918.615l-3.226 6.881h2.121l.422-1.167h2.595l.245 1.167h2.493zm-2.458-2.748l1.204-3.325.692 3.325h-1.896zM14.036 8.262h2.011l-1.259 7.496h-2.011l1.259-7.496z"/></svg>
+                <!-- Mastercard -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#EB001B" d="M15.5 8.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z"/><path fill="#F79E1B" d="M8.5 8.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11z"/><path fill="#FF5F00" d="M12 9.5a5.5 5.5 0 0 0-2.1 4.5 5.5 5.5 0 0 0 2.1 4.5 5.5 5.5 0 0 0 2.1-4.5 5.5 5.5 0 0 0-2.1-4.5z"/></svg>
+                <!-- Amex -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#002663" d="M18.5 4H5.5C4.12 4 3 5.12 3 6.5v11C3 18.88 4.12 20 5.5 20h13c1.38 0 2.5-1.12 2.5-2.5v-11C21 5.12 19.88 4 18.5 4zm-2.3 12h-1.7l-1.3-2.1-1.3 2.1H10.2l2.1-3.4-2.1-3.4h1.8l1.3 2.1 1.3-2.1h1.7l-2.1 3.4 2.1 3.4zm3.3 0h-1.4v-6.8h1.4v6.8z"/></svg>
+                <!-- PayPal -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#003087" d="M7.5 20H4V4h7c2.76 0 5 2.24 5 5s-2.24 5-5 5H7.5v6zm0-12v4h3c1.1 0 2-.9 2-2s-.9-2-2-2h-3z"/><path fill="#009CDE" d="M19 10c0 2.76-2.24 5-5 5H12v-4.13l-1.13 4.13H8.7L11 8h2.5c1.1 0 2 .9 2 2h1.5c2.76 0 5 2.24 5 5z"/></svg>
+                
+                <!-- 文字类支付图标 -->
+                <span class="pay-text">XTransfer</span>
+                <span class="pay-text">Wise</span>
+                <span class="pay-text">Western Union</span>
+                <span class="pay-text">T/T</span>
+                <span class="pay-text">WorldFirst</span>
+            </div>
+            <div>&copy; 2026 Flawless Prints. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- 交互脚本 -->
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.style.display = 'block';
+                window.scrollTo(0, 0);
+                document.querySelector('.nav-links').classList.remove('open');
+            }
+        }
+
+        function toggleAnnPhoto() {
+            const frame = document.getElementById('annPhotoFrame');
+            frame.classList.toggle('is-flipped');
+        }
+
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('formSuccess').offsetTop - 100, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
